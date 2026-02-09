@@ -21,7 +21,7 @@ async def login(
             "access_token": "mysecrettoken",
             "token_type": "bearer"
         }
-    raise HTTPException(status_code=401, detail="Invalid credentials")
+    raise HTTPException(status_code = 401, detail = "Invalid credentials")
 
 @app.get("/users/{user_id}")
 async def get_user(user_id: int):
@@ -55,5 +55,6 @@ async def dashboard(token: str = Depends(auth.get_current_token)):
     }
 
 @app.get("/users_list")
-def get_users(db: Session = Depends(get_db)):
+def get_users(db: Session = Depends(get_db), token: str = Depends(auth.get_current_token)):
+    auth.verify_token(token)
     return db.query(UserModel).limit(1000).all()
