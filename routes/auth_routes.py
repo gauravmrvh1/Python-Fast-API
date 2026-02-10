@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Form, HTTPException
-import constants
+import Config.constants as constants
 
 router = APIRouter()
 

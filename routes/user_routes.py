@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Form, Depends, HTTPException, status
 from sqlalchemy.exc import IntegrityError
-import schemas
+import Schema.schemas as schemas
 from sqlalchemy.orm import Session
-import auth, models, database, logging
+import auth, Models.models as models, Config.database as database, logging
 
 router = APIRouter()
 logger = logging.getLogger(__name__)

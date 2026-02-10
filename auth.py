@@ -1,6 +1,6 @@
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
-import constants
+import Config.constants as constants
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
