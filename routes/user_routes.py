@@ -1,13 +1,39 @@
 from fastapi import APIRouter, Form, Depends, HTTPException, status
 from sqlalchemy.exc import IntegrityError
 import Schema.schemas as schemas
+import Schema.response as responseSchema
 from sqlalchemy.orm import Session
 import Services.auth as authService, Models.models as models, Config.database as database, logging
+from enum import Enum
+from fastapi.responses import JSONResponse
 
-router = APIRouter()
+class Tags(Enum):
+    USERS = "Users Module"
+    ADMIN = "Admin"
+    
+router = APIRouter(
+    # prefix="/users-routes", # URL prefix
+    tags=[Tags.USERS], # Swagger grouping
+    dependencies=[Depends(authService.get_current_token)], # Router-level auth
+    default_response_class=JSONResponse,  # Default response type
+    responses={
+        401: {"description": "Unauthorized"},
+        403: {"description": "Forbidden"},
+    },
+    redirect_slashes=True, # /users → /users/
+    deprecated=False, # Mark whole router deprecated
+    include_in_schema=True, # Show in Swagger
+)
+
 logger = logging.getLogger(__name__)
 
-@router.post("/users_list")
+@router.post(
+    "/users_list",
+    response_model=list[responseSchema.UserResponse],
+    description="Returns list of users",
+    response_description= "Successful Response",
+    response_model_by_alias=True,
+)
 def get_users(
     db: Session = Depends(database.get_db),
     _: str = Depends(authService.get_current_token)
