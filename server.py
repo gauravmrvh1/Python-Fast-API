@@ -4,7 +4,7 @@ from routes import (
 )
 
 app = FastAPI(
-    title="My API",
+    title="Gaurav Marvaha",
     swagger_ui_parameters={
         "persistAuthorization": True
     }
