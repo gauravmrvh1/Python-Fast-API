@@ -51,6 +51,6 @@ async def create_users(
     except Exception as e:
         db.rollback()
         raise HTTPException(
-            status_code=500,
-            detail="Failed to create user"
+            status_code = 500,
+            detail = "Failed to create user"
         )
