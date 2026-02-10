@@ -28,9 +28,12 @@ def login(
             refresh_token = authService.create_refresh_token(
                 data={"sub": form.username},
             )
+            
+            opaqueToken = authService.generate_token()
             return {
                 "access_token": access_token,
                 "refresh_token": refresh_token,
+                "opaqueToken": opaqueToken,
                 "token_type": "bearer"
             }
             

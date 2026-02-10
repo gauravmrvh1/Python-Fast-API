@@ -4,6 +4,7 @@ from fastapi.security import OAuth2PasswordBearer
 import Config.constants as constants
 from jose import jwt, JWTError
 from Config.jwt_config import SECRET_KEY, ALGORITHM
+import secrets
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
@@ -45,3 +46,6 @@ def create_refresh_token(data: dict):
     expire = datetime.now() + timedelta(days=7)
     data.update({"exp": expire})
     return jwt.encode(data, SECRET_KEY, algorithm=ALGORITHM)
+
+def generate_token():
+    return secrets.token_urlsafe(2024)
