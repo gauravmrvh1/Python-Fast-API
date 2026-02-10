@@ -4,24 +4,12 @@ from models import User as UserModel
 import auth
 from sqlalchemy.orm import Session
 from database import get_db
+from routes import auth_routes, base_routes
 
 app = FastAPI()
+app.include_router(auth_routes.router)
+app.include_router(base_routes.router)
 
-@app.get("/")
-async def root():
-    return {"message": "Hello FastAPI"}
-
-@app.post("/login")
-async def login(
-    username: str = Form(...),
-    password: str = Form(...)
-):
-    if username == "admin" and password == "123":
-        return {
-            "access_token": "mysecrettoken",
-            "token_type": "bearer"
-        }
-    raise HTTPException(status_code = 401, detail = "Invalid credentials")
 
 @app.get("/users/{user_id}")
 async def get_user(user_id: int):
