@@ -1,5 +1,5 @@
-from fastapi import APIRouter, HTTPException
-import logging
+from fastapi import APIRouter, HTTPException, Depends
+import logging, Services.auth as auth
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -44,3 +44,15 @@ async def root():
                 }
             }
         )
+
+@router.get("/search")
+async def search(q: str, page: int = 1):
+    return {"query": q, "page": page}
+
+
+@router.get("/dashboard")
+async def dashboard(token: str = Depends(auth.get_current_token)):
+    auth.verify_token(token)
+    return {
+        "success": "true"
+    }
