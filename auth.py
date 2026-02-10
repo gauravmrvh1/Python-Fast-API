@@ -13,7 +13,7 @@ def get_current_token(token: str = Depends(oauth2_scheme)) -> str:
     return token
 
 
-def verify_token(token: str):
+def verify_token(token: str) -> str | HTTPException:
     if token != constants.FAKE_VALID_TOKEN:
         raise HTTPException(
             status_code = 401,

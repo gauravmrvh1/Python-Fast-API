@@ -18,4 +18,4 @@ venv/Scripts/activate
 
 python -m uvicorn main:app --reload (To start fastApi server )
 
-python -m uvicorn server:app --reload (To start fastApi server )
+python -m uvicorn server:app --reload

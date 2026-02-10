@@ -1,11 +1,13 @@
-from fastapi import FastAPI, Form, HTTPException, Depends
-from models import User as UserModel
+from fastapi import FastAPI, Depends
 import auth
-from sqlalchemy.orm import Session
-from database import get_db
 from routes import auth_routes, base_routes, user_routes
 
-app = FastAPI(title="My API")
+app = FastAPI(
+    title="My API",
+    swagger_ui_parameters={
+        "persistAuthorization": True
+    }
+)
 app.include_router(auth_routes.router, prefix="/auth", tags=["Auth"])
 app.include_router(base_routes.router)
 app.include_router(user_routes.router, prefix="/user", tags=["Users"])
@@ -21,8 +23,3 @@ async def dashboard(token: str = Depends(auth.get_current_token)):
     return {
         "success": "true"
     }
-
-@app.get("/users_list")
-def get_users(db: Session = Depends(get_db), token: str = Depends(auth.get_current_token)):
-    auth.verify_token(token)
-    return db.query(UserModel).limit(1000).all()
