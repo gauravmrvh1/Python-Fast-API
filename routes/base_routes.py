@@ -51,8 +51,7 @@ async def search(q: str, page: int = 1):
 
 
 @router.get("/dashboard")
-async def dashboard(token: str = Depends(auth.get_current_token)):
-    auth.verify_token(token)
+async def dashboard(_: str = Depends(auth.get_current_user)):
     return {
         "success": "true"
     }

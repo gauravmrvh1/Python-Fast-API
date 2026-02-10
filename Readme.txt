@@ -32,3 +32,7 @@ alembic upgrade head
 ## Remove All & do fresh:
 alembic downgrade base
 alembic upgrade head
+
+
+### Token Generation
+pip install python-jose passlib[bcrypt]

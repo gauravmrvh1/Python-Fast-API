@@ -2,7 +2,7 @@ from fastapi import APIRouter, Form, Depends, HTTPException, status
 from sqlalchemy.exc import IntegrityError
 import Schema.schemas as schemas
 from sqlalchemy.orm import Session
-import Services.auth as auth, Models.models as models, Config.database as database, logging
+import Services.auth as authService, Models.models as models, Config.database as database, logging
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -10,12 +10,14 @@ logger = logging.getLogger(__name__)
 @router.post("/users_list")
 def get_users(
     db: Session = Depends(database.get_db),
-    _: str = Depends(auth.get_current_token)
+    _: str = Depends(authService.get_current_token)
 ):
     return db.query(models.User).limit(1000).all()
 
 @router.get("/{user_id}")
-async def get_user(user_id: int):
+async def get_user(
+    user_id: int
+):
     return {"user_id": user_id}
 
 @router.post("/")
@@ -24,7 +26,7 @@ async def create_user_form(
     email: str = Form(...),
     mobile_number: int = Form(...),
     db: Session = Depends(database.get_db),
-    _: str = Depends(auth.get_current_token)
+    _: str = Depends(authService.get_current_user)
 ):
     try:
         user = models.User(name=name, email=email, mobile_number=mobile_number)
@@ -48,7 +50,7 @@ async def create_user_form(
 async def create_users(
     user: schemas.User,
     db: Session = Depends(database.get_db),
-    _: str = Depends(auth.get_current_token)
+    _: str = Depends(authService.get_current_token)
 ):
     try:
         db_user = models.User(
@@ -89,7 +91,7 @@ async def create_users(
 async def create_admin_user(
     user: schemas.Admin,
     db: Session = Depends(database.get_db),
-    _: str = Depends(auth.get_current_token)
+    _: str = Depends(authService.get_current_token)
 ):
     try:
         db_user = models.Admin(
