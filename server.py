@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Depends
-import auth
+import Services.auth as auth
 from routes import auth_routes, base_routes, user_routes
 
 app = FastAPI(
