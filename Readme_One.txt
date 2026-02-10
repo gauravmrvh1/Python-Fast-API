@@ -20,4 +20,6 @@ python -m uvicorn main:app --reload
 -------------------------------
 
 
-python -m uvicorn server:app --reload (here we have renamed file from main.py to server.py)
+(here we have renamed file from main.py to server.py)
+
+python -m uvicorn server:app --reload 
