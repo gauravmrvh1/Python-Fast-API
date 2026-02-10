@@ -15,4 +15,4 @@ class User(BaseModel):
 class Admin(BaseModel):
     f_name: str = Field(default="Gaurav", description="Full name of user")
     l_name: str = Field(default="gaurav@gmail.com")
-    username: int = Field(...)
+    username: str = Field(...)

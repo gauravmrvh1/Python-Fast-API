@@ -26,11 +26,19 @@ async def create_user_form(
     db: Session = Depends(database.get_db),
     _: str = Depends(auth.get_current_token)
 ):
-    user = models.User(name=name, email=email, mobile_number=mobile_number)
-    db.add(user)
-    db.commit()
-    db.refresh(user)
-    return user
+    try:
+        user = models.User(name=name, email=email, mobile_number=mobile_number)
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+        return user
+
+    except Exception as e:
+        logger.exception(str(e))
+        raise HTTPException(
+            status_code = 500,
+            detail=str(e)
+        )
 
 @router.post(
     "/create-user",

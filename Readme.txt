@@ -25,3 +25,10 @@ python -m uvicorn server:app --reload
 
 pip install alembic
 alembic init migrations
+
+## Create Table Using migration
+alembic upgrade head
+
+## Remove All & do fresh:
+alembic downgrade base
+alembic upgrade head
