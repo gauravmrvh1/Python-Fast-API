@@ -38,5 +38,12 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(100), nullable=False)
     email = Column(String(150), unique=True, index=True, nullable=False)
-    mobile_number  = Column(BigInteger, nullable=False)
+    mobile_number  = Column(BigInteger, nullable=False, unique=True)
+    aadhar_number  = Column(BigInteger, nullable=True, unique=True)
 
+class Admin(Base):
+    __tablename__ = "pt_admins"
+    id = Column(Integer, primary_key=True, index=True)
+    first_name = Column(String(100), nullable=False)
+    last_name = Column(String(100), nullable=False)
+    username = Column(String(150), unique=True, index=True, nullable=False)
