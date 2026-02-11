@@ -4,7 +4,8 @@ import Schema.schemas as schemas
 import Schema.response as responseSchema
 from sqlalchemy.orm import Session
 import Services.auth as authService
-from Services.user_service import UserService
+from Services.user_service import UserService as UserServiceFromImport
+import Services.user_service as UserService
 import Models.models as models
 import Config.database as database, logging
 from enum import Enum
@@ -50,7 +51,8 @@ def get_users(
     # # when response model added in route
     # return db.query(models.User).limit(1000).all()
 
-    response=UserService.get_user_list(page=page, db=db, size=size)
+    # response=UserServiceFromImport.get_user_list(page=page, db=db, size=size)
+    response=UserService.UserService.get_user_list(page=page, db=db, size=size)
     data = response['data']
     # build success response
     return responseUtil.success_response(data, cached=response['meta']['cached'])
