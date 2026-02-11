@@ -13,8 +13,14 @@ from fastapi.responses import JSONResponse
 import utils.response as responseUtil
 import core.redis as redisCore
 from fastapi import Query
-from tasks import send_email_task
+from tasks import (
+    send_email_task,
+    heavy_calculation_task,
+    process_file_task,
+)
 import tasks
+from celery.result import AsyncResult
+from celery_worker import celery
 
 class Tags(Enum):
     USERS = "Users Module"
@@ -167,13 +173,39 @@ async def create_admin_user(
             detail=str(e)
         )
         
+@router.post("/send-email")
 def send_email(email: str):
-    print(f"Sending email to {email}")
-    
+    task = send_email_task.delay(email)
+    return {"task_id": task.id}
+
+@router.post("/calculate")
+def calculate(number: int):
+    task = heavy_calculation_task.delay(number)
+    return {"task_id": task.id}
+
+@router.post("/process-file")
+def process_file(filename: str):
+    task = process_file_task.delay(filename)
+    return {"task_id": task.id}
+
 @router.post("/register")
 def register(email: str):
+    send_email_task.delay(email)
     tasks.send_email_task.delay(email)
     return {"message": "Task added to queue"}
+
+
 # async def register(email: str, background_tasks: BackgroundTasks):
 #     background_tasks.add_task(send_email, email)
 #     return {"message": "User registered. Email will be sent."}
+
+
+
+@router.get("/task-status/{task_id}")
+def get_task_status(task_id: str):
+    task = AsyncResult(task_id, app=celery)
+    return {
+        "task_id": task_id,
+        "status": task.status,
+        "result": task.result
+    }

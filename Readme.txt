@@ -66,7 +66,7 @@ pip install celery
 
 ######## Start Worker ############################################################
 python -m celery -A celery_worker.celery worker --loglevel=info
-python -m celery -A celery_worker.celery worker --loglevel=info --pool=solo
+python -m celery -A celery_worker.celery worker --loglevel=info --pool=solo --autoreload
 ##################################################################################
 
 ##################################################################################
