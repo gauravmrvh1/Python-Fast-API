@@ -10,6 +10,8 @@ import Config.database as database, logging
 from enum import Enum
 from fastapi.responses import JSONResponse
 import utils.response as responseUtil
+import core.redis as redisCore
+from fastapi import Query
 
 class Tags(Enum):
     USERS = "Users Module"
@@ -31,6 +33,7 @@ router = APIRouter(
 
 logger = logging.getLogger(__name__)
 
+CACHE_KEY = "users:list"
 @router.post(
     "/users_list",
     # response_model=list[responseSchema.UserResponse],
@@ -39,15 +42,18 @@ logger = logging.getLogger(__name__)
     response_model_by_alias=True,
 )
 def get_users(
-    page: int = 1,
-    size: int = 2,
+    page: int = Query(1, ge=1, description="Page-number"),
+    size: int = Query(10, ge=1, le=100, description="Page-size"),
     db: Session = Depends(database.get_db),
     _: str = Depends(authService.get_current_token)
 ):
-    # return UserService.get_user_list(db)
-    users = UserService.get_user_list(db, page, size)
-    return responseUtil.success_response(users)
-    return db.query(models.User).limit(1000).all()
+    # # when response model added in route
+    # return db.query(models.User).limit(1000).all()
+
+    response=UserService.get_user_list(page=page, db=db, size=size)
+    data = response['data']
+    # build success response
+    return responseUtil.success_response(data, cached=response['meta']['cached'])
 
 @router.get("/{user_id}")
 async def get_user(

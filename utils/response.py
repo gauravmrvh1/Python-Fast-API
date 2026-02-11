@@ -1,6 +1,7 @@
-def success_response(data, message="Success"):
+def success_response(data, message="Data Fetched Successfully.", cached="false"):
     return {
         "success": True,
         "message": message,
-        "data": data
+        "cached": cached,
+        "data": data,
     }

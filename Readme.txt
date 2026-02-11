@@ -42,3 +42,12 @@ pip install python-jose passlib[bcrypt]
 http://127.0.0.1:8000/swagger
 http://127.0.0.1:8000/redoc-swagger
 http://127.0.0.1:8000/swagger.json
+
+
+#### Redis install ###############
+pip install redis
+python -m pip install redis
+
+############ set path in windows environment then run below command #############
+- install redis from https://github.com/tporadowski/redis/releases
+- redis-server
