@@ -1,0 +1,5 @@
+https://www.python.org/downloads/windows/
+
+C:\Users\Unthinkable-lap\AppData\Local\Python\pythoncore-3.14-64\Scripts
+
+C:\Users\Unthinkable-lap\AppData\Local\Programs\Python\Python311\

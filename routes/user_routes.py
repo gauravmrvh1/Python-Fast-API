@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Form, Depends, HTTPException, status
+from fastapi import APIRouter, Form, Depends, HTTPException, status, BackgroundTasks
 from sqlalchemy.exc import IntegrityError
 import schema.schemas as schemas
 import schema.response as responseSchema
@@ -13,6 +13,8 @@ from fastapi.responses import JSONResponse
 import utils.response as responseUtil
 import core.redis as redisCore
 from fastapi import Query
+from tasks import send_email_task
+import tasks
 
 class Tags(Enum):
     USERS = "Users Module"
@@ -164,3 +166,14 @@ async def create_admin_user(
             status_code = 500,
             detail=str(e)
         )
+        
+def send_email(email: str):
+    print(f"Sending email to {email}")
+    
+@router.post("/register")
+def register(email: str):
+    tasks.send_email_task.delay(email)
+    return {"message": "Task added to queue"}
+# async def register(email: str, background_tasks: BackgroundTasks):
+#     background_tasks.add_task(send_email, email)
+#     return {"message": "User registered. Email will be sent."}

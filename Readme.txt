@@ -2,6 +2,10 @@ python --version
 
 python -m venv venv
 
+venv/Scripts/activate
+
+python -m pip install fastapi uvicorn celery redis flower python-jose[cryptography]
+
 python -m pip install --upgrade pip
 
 python -m pip install fastapi uvicorn python-multipart
@@ -14,7 +18,8 @@ python -m pip --version
 
 python -m ensurepip --upgrade
 
-venv/Scripts/activate
+python -m pip install python-jose[cryptography]
+
 
 python -m uvicorn main:app --reload (To start fastApi server )
 
@@ -38,16 +43,34 @@ alembic upgrade head
 pip install python-jose passlib[bcrypt]
 
 
-########### Swagger ###########
+########### Swagger #############################################################
 http://127.0.0.1:8000/swagger
 http://127.0.0.1:8000/redoc-swagger
 http://127.0.0.1:8000/swagger.json
+#################################################################################
 
 
-#### Redis install ###############
+#### Redis install ##############################################################
 pip install redis
 python -m pip install redis
+#################################################################################
 
 ############ set path in windows environment then run below command #############
 - install redis from https://github.com/tporadowski/redis/releases
 - redis-server
+#################################################################################
+
+############ install Celery #####################################################
+pip install celery
+#################################################################################
+
+######## Start Worker ############################################################
+python -m celery -A celery_worker.celery worker --loglevel=info
+python -m celery -A celery_worker.celery worker --loglevel=info --pool=solo
+##################################################################################
+
+##################################################################################
+pip install flower
+python -m celery -A celery_worker.celery flower
+    - http://localhost:5555
+##################################################################################
