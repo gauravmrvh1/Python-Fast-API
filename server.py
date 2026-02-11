@@ -3,6 +3,7 @@ from routes import (
     auth_routes, base_routes, user_routes
 )
 from middleware.logging_middleware import log_requests
+from middleware.logging_middleware1 import LoggingMiddleware as LoggingMiddleware1
 
 app = FastAPI(
     debug=True,
@@ -24,3 +25,4 @@ app.include_router(
 )
 
 app.middleware("http")(log_requests)
+app.add_middleware(LoggingMiddleware1)
