@@ -7,7 +7,7 @@ import Services.auth as authService
 from Services.user_service import UserService as UserServiceFromImport
 import Services.user_service as UserService
 import Models.models as models
-import Config.database as database, logging
+import config.database as database, logging
 from enum import Enum
 from fastapi.responses import JSONResponse
 import utils.response as responseUtil

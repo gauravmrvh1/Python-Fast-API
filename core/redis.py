@@ -1,7 +1,7 @@
 import redis
 import json
-import Config.redis as redisSettings
-from Config.redis import REDIS_HOST, REDIS_PORT
+import config.redis as redisSettings
+from config.redis import REDIS_HOST, REDIS_PORT
 
 class RedisClient:
     def __init__(self):

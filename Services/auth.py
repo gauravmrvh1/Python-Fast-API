@@ -1,9 +1,9 @@
 from fastapi import Depends, HTTPException
 from datetime import datetime, timedelta
 from fastapi.security import OAuth2PasswordBearer
-import Config.constants as constants
+import config.constants as constants
 from jose import jwt, JWTError
-from Config.jwt_config import SECRET_KEY, ALGORITHM
+from config.jwt_config import SECRET_KEY, ALGORITHM
 import secrets
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")

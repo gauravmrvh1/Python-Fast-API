@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Form, HTTPException, Depends
-import Config.constants as constants
+import config.constants as constants
 from fastapi.security import OAuth2PasswordRequestForm
 from datetime import timedelta
-import Config.jwt_config as jwt_config
+import config.jwt_config as jwt_config
 from jose import jwt
 import Services.auth as authService
 

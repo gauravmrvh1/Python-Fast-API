@@ -3,7 +3,7 @@ import logging, Services.auth as auth
 import redis
 from utils import response
 import utils.response as utilResponse
-import Config.redis as redisSettings
+import config.redis as redisSettings
 from core.redis import redis_client
 import core.redis as redisCore
 
