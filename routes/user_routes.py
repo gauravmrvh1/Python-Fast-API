@@ -3,9 +3,9 @@ from sqlalchemy.exc import IntegrityError
 import schema.schemas as schemas
 import schema.response as responseSchema
 from sqlalchemy.orm import Session
-import Services.auth as authService
-from Services.user_service import UserService as UserServiceFromImport
-import Services.user_service as UserService
+import services.auth as authService
+from services.user_service import UserService as UserServiceFromImport
+import services.user_service as UserService
 import models.models as models
 import config.database as database, logging
 from enum import Enum

@@ -4,7 +4,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from datetime import timedelta
 import config.jwt_config as jwt_config
 from jose import jwt
-import Services.auth as authService
+import services.auth as authService
 
 router = APIRouter()
 
