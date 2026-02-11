@@ -3,7 +3,10 @@ from sqlalchemy.exc import IntegrityError
 import Schema.schemas as schemas
 import Schema.response as responseSchema
 from sqlalchemy.orm import Session
-import Services.auth as authService, Models.models as models, Config.database as database, logging
+import Services.auth as authService
+from Services.user_service import UserService
+import Models.models as models
+import Config.database as database, logging
 from enum import Enum
 from fastapi.responses import JSONResponse
 
@@ -38,6 +41,7 @@ def get_users(
     db: Session = Depends(database.get_db),
     _: str = Depends(authService.get_current_token)
 ):
+    return UserService.get_user_list(db)
     return db.query(models.User).limit(1000).all()
 
 @router.get("/{user_id}")
