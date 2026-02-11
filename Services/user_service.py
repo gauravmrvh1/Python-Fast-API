@@ -4,5 +4,10 @@ import Models.models as models
 class UserService:
 
     @staticmethod
-    def get_user_list(db: Session):
-        return db.query(models.User).limit(1000).all()
+    def get_user_list(
+        db: Session,
+        page: int,
+        size: int,
+    ):
+        offset = (page - 1) * size
+        return db.query(models.User).offset(offset).limit(size).all()

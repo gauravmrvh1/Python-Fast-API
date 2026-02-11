@@ -9,6 +9,7 @@ import Models.models as models
 import Config.database as database, logging
 from enum import Enum
 from fastapi.responses import JSONResponse
+import utils.response as responseUtil
 
 class Tags(Enum):
     USERS = "Users Module"
@@ -32,16 +33,20 @@ logger = logging.getLogger(__name__)
 
 @router.post(
     "/users_list",
-    response_model=list[responseSchema.UserResponse],
+    # response_model=list[responseSchema.UserResponse],
     description="Returns list of users",
     response_description= "Successful Response",
     response_model_by_alias=True,
 )
 def get_users(
+    page: int = 1,
+    size: int = 2,
     db: Session = Depends(database.get_db),
     _: str = Depends(authService.get_current_token)
 ):
-    return UserService.get_user_list(db)
+    # return UserService.get_user_list(db)
+    users = UserService.get_user_list(db, page, size)
+    return responseUtil.success_response(users)
     return db.query(models.User).limit(1000).all()
 
 @router.get("/{user_id}")
