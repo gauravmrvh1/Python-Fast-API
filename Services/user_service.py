@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-import Models.models as models
+import models.models as models
 from core.redis import redis_client
 
 class UserService:

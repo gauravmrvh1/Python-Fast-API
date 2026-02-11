@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Form, Depends, HTTPException, status
 from sqlalchemy.exc import IntegrityError
-import Schema.schemas as schemas
-import Schema.response as responseSchema
+import schema.schemas as schemas
+import schema.response as responseSchema
 from sqlalchemy.orm import Session
 import Services.auth as authService
 from Services.user_service import UserService as UserServiceFromImport
 import Services.user_service as UserService
-import Models.models as models
+import models.models as models
 import config.database as database, logging
 from enum import Enum
 from fastapi.responses import JSONResponse
@@ -37,7 +37,7 @@ logger = logging.getLogger(__name__)
 CACHE_KEY = "users:list"
 @router.post(
     "/users_list",
-    # response_model=list[responseSchema.UserResponse],
+    # response_model=list[responseschema.UserResponse],
     description="Returns list of users",
     response_description= "Successful Response",
     response_model_by_alias=True,
