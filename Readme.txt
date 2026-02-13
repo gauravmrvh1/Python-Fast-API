@@ -51,6 +51,7 @@ http://127.0.0.1:8000/swagger.json
 
 
 #### Redis install ##############################################################
+https://redis.io/downloads/#Redis_Insight
 pip install redis
 python -m pip install redis
 #################################################################################
@@ -74,3 +75,14 @@ pip install flower
 python -m celery -A celery_worker.celery flower
     - http://localhost:5555
 ##################################################################################
+
+
+
+################ install RabitMq #################################################
+
+https://www.erlang.org/downloads
+https://www.rabbitmq.com/docs/install-windows
+
+python -m pip install pika
+
+https://chatgpt.com/c/698f06e4-7014-8324-a0bd-4b038aabaabf
