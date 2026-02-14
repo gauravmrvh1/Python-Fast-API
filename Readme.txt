@@ -51,6 +51,7 @@ http://127.0.0.1:8000/swagger.json
 
 
 #### Redis install ##############################################################
+https://chatgpt.com/share/69900f61-3624-8011-82af-508b2659782b
 https://redis.io/downloads/#Redis_Insight
 pip install redis
 python -m pip install redis

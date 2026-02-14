@@ -6,8 +6,13 @@ from middleware.logging_middleware import log_requests
 from middleware.logging_middleware1 import LoggingMiddleware as LoggingMiddleware1
 
 import services.auth as authService
-import pika
-import json
+import threading
+from multiprocessing import Process
+from producer.add_email_producer import publish_email_message
+from producer.add_task_producer import start_publish_task
+
+from consumer.email_consumer import start_email_consumer
+from consumer.add_task_consumer import start_task_consumer
 
 
 app = FastAPI(
@@ -22,16 +27,35 @@ app = FastAPI(
 )
 app.include_router(auth_routes.router, prefix="/auth", tags=["Auth Module"])
 app.include_router(base_routes.router, tags=["Home Module"])
-
 app.include_router(
     user_routes.router,
     # prefix="/user",
     # tags=["Users"]
 )
 
-app.middleware("http")(log_requests)
-app.add_middleware(LoggingMiddleware1)
+# app.middleware("http")(log_requests)
+# app.add_middleware(LoggingMiddleware1)
 
+
+WORKERS = [start_email_consumer,start_task_consumer,]
+
+@app.on_event("startup")
+def start_workers():
+    print('********** Hello **************************')
+    # ### Start Worker Individually #######################
+    #     threading.Thread(target=start_email_consumer, daemon=True).start()
+    #     threading.Thread(target=start_task_consumer, daemon=True).start()
+
+    ############ Threads for I/O bound Single Thread #################
+    # for worker in WORKERS:
+    #     threading.Thread(target=worker, daemon=True).start()
+    ##################################################################
+    
+    ######### For CPU heavy tasks Starting 4 Consumers Here ########## 
+    # for _ in range(2):
+    #     Process(target=start_email_consumer).start()
+    #     Process(target=start_task_consumer).start()
+    ##################################################################
 
 
 @app.post("/rabinMQ")
@@ -39,28 +63,11 @@ def register_user(
     email: str,
     _ = Depends(authService.get_current_user),
 ):
-    publish_message({
-        "name": "Gaurav Marvaha",
-        "email": email
-    })
+    emailData = {"name": "Gaurav Marvaha","email": email}
+    publish_email_message(emailData)
+    
+    start_publish_task()
+    
     return {"message": "User registered. Email will be sent asynchronously."}
 
 
-def publish_message(message: dict):
-    connection = pika.BlockingConnection(
-        pika.ConnectionParameters("localhost")
-    )
-    channel = connection.channel()
-
-    channel.queue_declare(queue="email_queue", durable=True)
-
-    channel.basic_publish(
-        exchange="",
-        routing_key="email_queue",
-        body=json.dumps(message),
-        properties=pika.BasicProperties(
-            delivery_mode=2  # persistent
-        ),
-    )
-
-    connection.close()
