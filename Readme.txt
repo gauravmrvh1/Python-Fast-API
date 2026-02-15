@@ -25,6 +25,8 @@ python -m uvicorn main:app --reload (To start fastApi server )
 
 python -m uvicorn server:app --reload
 
+python -m uvicorn server:app --reload --port=9002
+
 
 ###### SQLAlchemy migration tool ########
 
