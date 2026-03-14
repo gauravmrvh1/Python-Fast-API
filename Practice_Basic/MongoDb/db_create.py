@@ -1,5 +1,7 @@
 import pymongo
 
+# python -m pip install pymongo
+
 myclient = pymongo.MongoClient('mongodb://localhost:27017/')
 
 #######################################  Create DB #######################################
