@@ -1,4 +1,4 @@
-import numpy as np
+import NumpyPractice.numpy_test as np
 from PIL import Image
 
 # Image size
