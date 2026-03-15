@@ -23,11 +23,19 @@ print("\n")
 
 vectorizer = CountVectorizer()
 feature_matrix = vectorizer.fit_transform(df["combined_features"])
+
+print("*********************************vectorizer.get_feature_names_out()*********************************")
+print(vectorizer.get_feature_names_out())
+print("*********************************vectorizer.get_feature_names_out()*********************************")
+
 similarity = cosine_similarity(feature_matrix)
 print("\n ******************* similarity ******************* \n")
 print(similarity)
+print("\n ******************* similarity ******************* \n")
+
 print("\n ******************* feature_matrix ******************* \n")
 print(feature_matrix)
+print("\n ******************* feature_matrix ******************* \n")
 
 
 
