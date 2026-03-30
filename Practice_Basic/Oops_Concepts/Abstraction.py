@@ -29,3 +29,34 @@ def notify_user(notification: Notification):
 notify_user(EmailNotification())
 notify_user(SMSNotification())
 notify_user(PushNotification())
+
+
+
+
+
+
+# Abstract class
+class Payment(ABC):
+
+    @abstractmethod
+    def pay(self, amount):
+        pass
+
+
+# Concrete class
+class CreditCardPayment(Payment):
+    def pay(self, amount):
+        print(f"Paid {amount} using Credit Card")
+
+
+class UpiPayment(Payment):
+    def pay(self, amount):
+        print(f"Paid {amount} using UPI")
+
+
+# Usage
+p1 = CreditCardPayment()
+p1.pay(1000)
+
+p2 = UpiPayment()
+p2.pay(500)
