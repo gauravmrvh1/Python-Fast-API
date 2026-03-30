@@ -44,6 +44,8 @@ class Person:
 class Student(Person):
   def __init__(self, fname, lname):
     super().__init__(fname, lname)
+    # self.firstname = fname
+    # self.lastname = lname
     self.graduationyear = 2019
     
   def welcome(self):
@@ -53,3 +55,21 @@ x = Student("Gaurav", "Olsen")
 x.printname()
 print(x.graduationyear)
 x.welcome()
+
+
+
+# #############################################################################
+# #############################################################################
+class Animal:
+  def speak(self):
+    print("Animal speaks")
+
+class Dog(Animal):
+  def bark(self):
+    print("Dog barks")
+
+d = Dog()
+d.speak() # inherited
+d.bark()
+# #############################################################################
+# #############################################################################
