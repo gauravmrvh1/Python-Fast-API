@@ -5,17 +5,33 @@ print(my_list)   # [10, 2, 3]
 # List Methods
 my_list.append(4)  # This will add 4 to the end of the list
 print(my_list)   # [10, 2, 3, 4]
+
 my_list.insert(1, 20)  # This will insert 20 at index 1
 print(my_list)   # [10, 20, 2, 3, 4]
+
 my_list.remove(2)  # This will remove the first occurrence of 2 from the list
 print(my_list)   # [10, 20, 3, 4]
+
 my_list.pop()  # This will remove the last element from the list
 print(my_list)   # [10, 20, 3]
+
 my_list.pop(1)  # This will remove the element at index 1 from the list
 print(my_list)   # [10, 3]
+
 my_list.clear()  # This will remove all elements from the list
 print(my_list)   # []
 
+my_list = [1, 2, 3]
+tropical = ["mango", "pineapple", "papaya"]
+my_list.extend(tropical)
+print(my_list)   #  [1, 2, 3, 'mango', 'pineapple', 'papaya']
+my_list.remove('pineapple')
+print("******************* ", my_list)
+del my_list[0]
+print("******************* del my_list[0] ********** ", my_list)
+
+# del my_list
+# print("******************* del my_list ********** ", my_list)
 
 # List Slicing
 my_list = [1, 2, 3, 4, 5]
@@ -180,3 +196,45 @@ print(nested_list_tuple_dict_set_frozenset_bool_none_complex_function_class_modu
 nested_list_tuple_dict_set_frozenset_bool_none_complex_function_class_module_list_list_tuple_dict_set_frozenset_bool_none_complex = [1, 2, (3, 4), {"name": "gaurav", "mobile": 8881438098}, [5, 6], (7, 8), {"name": "gaurav", "mobile": 8881438098}, {1, 2, 3}, frozenset({4, 5, 6}), True, False, None, complex(1, 2), my_function, MyClass, math, [1, 2, 3], [[1, 2], [3, 4]], (5, 6), {"name": "gaurav", "mobile": 8881438098}, {1, 2, 3}, frozenset({4, 5, 6}), True, None, complex(1, 2)]
 print(nested_list_tuple_dict_set_frozenset_bool_none_complex_function_class_module_list_list_tuple_dict_set_frozenset_bool_none_complex)  # [1, 2, (3, 4), {'name': 'gaurav', 'mobile': 8881438098}, [5, 6], (7, 8), {'name': 'gaurav', 'mobile': 8881438098}, {1, 2, 3}, frozenset({4, 5, 6}), True, False, None, 1+2j, <function my_function at 0x7f8c8c8c8c8c>, <class '__main__.MyClass'>, <module 'math' (built-in)>, [1, 2, 3], [[1, 2], [3, 4]], (5, 6), {'name': 'gaurav', 'mobile': 8881438098}, {1, 2, 3}, frozenset({4, 5, 6}), True, None, 1+2j]
 
+
+
+listData = list(("apple", "banana", "cherry")) # Option 2: Tuple → List
+listData = ["apple", "banana", "cherry"]
+if "apple" in listData:
+  print("Yes, 'apple' is in the fruits list")
+  
+
+thisList = ["apple", "banana", "cherry"]
+for x in thisList:
+  print(x)
+  
+  
+thisList = ["apple", "banana", "cherry"]
+for i in range(len(thisList)):
+  print(thisList[i])
+  
+
+thisList = ["do", "while", "loop"]
+i = 0
+while i < len(thisList):
+  print(thisList[i])
+  i = i + 1
+
+
+thisList = ["apple", "banana", "cherry"]
+[print(x) for x in thisList]
+
+
+
+fruits = ["apple", "banana", "cherry", "kiwi", "mango"]
+newList = []
+for x in fruits:
+  if "a" in x:
+    newList.append(x)
+print(newList)
+
+
+fruits = ["apple", "banana", "cherry", "kiwi", "mango"]
+newList = [x for x in fruits if "a" in x]
+# newList = [expression for item in iterable if condition == True]
+print(newList)
