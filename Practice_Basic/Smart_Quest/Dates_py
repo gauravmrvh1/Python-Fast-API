@@ -1,0 +1,48 @@
+from datetime import datetime, timezone
+
+# x = datetime.datetime.now()
+x = datetime.now(timezone.utc)
+
+# print(x.year)
+# print(x.strftime("%a"))
+# print(x.strftime("%A"))
+# print(x.strftime("%b"))
+# print(x.strftime("%B"))
+# print(x.strftime("%c")) # century
+# print(x.strftime("%C")) # Local version of date and time
+# print(x.strftime("%d"))
+# print(x.strftime("%D"))
+# print(x.strftime("%e"))
+# print(x.strftime("%G"))   # year
+# print(x.strftime("%h"))
+# print(x.strftime("%H"))   # Hour
+# print(x.strftime("%I"))
+# print(x.strftime("%j"))   # day of the year
+# print(x.strftime("%m"))     # Month
+# print(x.strftime("%M"))   # Minute
+
+# print(x.strftime("%p"))   # AM or PM
+# print(x.strftime("%r"))     # Time in a.m. and p.m. notation
+# print(x.strftime("%R"))     # Time in 24-hour notation
+
+# print(x.strftime("%S"))     # Second
+
+# print(x.strftime("%t")) # Tab character
+# print(x.strftime("%T")) # Time in 24-hour notation (HH:MM:SS)
+
+# print(x.strftime("%u")) # Weekday as a decimal number, where 1 is Monday and 7 is Sunday
+# print(x.strftime("%U")) # Week number of the year (Sunday as the first day of the week)
+
+# print(x.strftime("%V")) # Weekday as a decimal number, where 0 is Sunday and 6 is Saturday
+
+# print(x.strftime("%w")) # Weekday as a decimal number, where 0 is Sunday and 6 is Saturday
+# print(x.strftime("%W")) # Week number of the year (Monday as the first day of the week)
+
+# print(x.strftime("%X")) # Local version of time
+# print(x.strftime("%x")) # Local version of date
+
+# print(x.strftime("%y")) # Year without century
+# print(x.strftime("%Y")) # Year with century
+
+print(x.strftime("%z")) # UTC offset in the form +HHMM or -HHMM (empty string if the object is naive).
+print(x.strftime("%Z")) # Time zone name (empty string if the object is naive).
