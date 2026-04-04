@@ -255,10 +255,9 @@ def main():
 
         else:
             print("Invalid choice")
-
-
 # ************************************************************************************************
 
+print("\n\n Starting Pinecone Vector DB demo...", flush=True, end="\n\n", sep="")
 if __name__ == "__main__":
     main()
     
