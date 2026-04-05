@@ -89,3 +89,9 @@ https://www.rabbitmq.com/docs/install-windows
 python -m pip install pika
 
 https://chatgpt.com/c/698f06e4-7014-8324-a0bd-4b038aabaabf
+
+
+
+# Vector DB
+python -m pip install --upgrade pinecone
+pip install qdrant-client
